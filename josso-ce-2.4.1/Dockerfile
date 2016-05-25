@@ -9,7 +9,6 @@ MAINTAINER Gianluca Brigandi <gianluca@atricore.com>
 
 ADD josso-ce-2.4.1.options /tmp/
 
-#RUN wget --quiet --no-cookies --no-check-certificate http://sourceforge.net/projects/josso/files/JOSSO%202/JOSSO-2.4.1/josso-ce-2.4.1-unix.jar -O /tmp/josso-ce-2.4.1-unix.jar
 RUN wget --no-cookies --no-check-certificate http://sourceforge.net/projects/josso/files/JOSSO%202/JOSSO-2.4.1/josso-ce-2.4.1-unix.jar -O /tmp/josso-ce-2.4.1-unix.jar
 
 RUN java -jar /tmp/josso-ce-2.4.1-unix.jar -options /tmp/josso-ce-2.4.1.options

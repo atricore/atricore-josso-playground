@@ -83,8 +83,16 @@ Vagrant.configure(2) do |config|
   pkg_cmd << "/usr/share/debconf/fix_db.pl; "
   pkg_cmd << "apt-get install -y -qq xfce4 firefox flashplugin-installer"
 
+  # Build unpublished docker images
+  play_cmd = "cd /home/vagrant; "
+  play_cmd << "git clone https://github.com/atricore/atricore-josso-playground.git; "
+  play_cmd << "docker build -t atricore/josso:oracle-java8 atricore-josso-playground/oracle-java8; "
+  play_cmd << "echo nameserver 172.17.0.1 > /etc/resolv.conf; " 
+
   config.vm.provision :shell, inline: pkg_cmd
-  config.vm.provision "docker_compose"
+  config.vm.provision :shell, inline: play_cmd, run: 'always'
+  config.vm.provision :docker_compose, yml: "/home/vagrant/atricore-josso-playground/demo-josso-ce-2.4.1-javaee-tomcat/docker-compose.yml", run: "always"
+   
   config.vm.network :forwarded_port, guest: 80, host: 4567
   config.vm.synced_folder "/Users", "/Users"
 end
