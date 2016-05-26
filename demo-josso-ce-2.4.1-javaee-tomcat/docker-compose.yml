@@ -21,14 +21,14 @@ skydns:
   ports:
    - 172.17.0.1:53:53/udp
 tomcat1:
-  image: atricore/josso:apache-tomcat8-josso-ce
+  image: atricore/josso:apache-tomcat8-tc1
   ports:
   - "9080:8080"
   - "9009:8009"
   volumes:
    - ./partnerapp_tomcat1.war:/opt/tomcat/webapps/partnerapp.war
 tomcat2:
-  image: atricore/josso:apache-tomcat8-josso-ce
+  image: atricore/josso:apache-tomcat8-tc2
   ports:
   - "9081:8080"
   - "9010:8009"
