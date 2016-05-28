@@ -11,7 +11,7 @@ skydock:
   image: crosbymichael/skydock
   links:
    - skydns:skydns
-  command: -ttl 30 -environment dev -s /docker.sock -domain docker -name demojossoce241javaeetomcat_skydns_1
+  command: -ttl 30 -environment dev -s /docker.sock -domain docker -name demo_skydns_1
   volumes:
    - /var/run/docker.sock:/docker.sock 
 skydns:

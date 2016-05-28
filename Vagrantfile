@@ -92,7 +92,7 @@ Vagrant.configure(2) do |config|
 
   config.vm.provision :shell, inline: pkg_cmd
   config.vm.provision :shell, inline: play_cmd, run: 'always'
-  config.vm.provision :docker_compose, yml: "/home/vagrant/atricore-josso-playground/demo-josso-ce-2.4.1-javaee-tomcat/docker-compose.yml", run: "always"
+  config.vm.provision :docker_compose, yml: "/home/vagrant/atricore-josso-playground/demo-josso-ce-2.4.1-javaee-tomcat/docker-compose.yml", project_name: "demo", run: "always"
    
   config.vm.network :forwarded_port, guest: 80, host: 4567
   config.vm.synced_folder "/Users", "/Users"
