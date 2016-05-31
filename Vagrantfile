@@ -95,6 +95,13 @@ Vagrant.configure(2) do |config|
     s.inline = pkg_cmd
   end
 
+  config.vm.provision "docker" do |d|
+    d.pull_images "crosbymichael/skydock"
+    d.pull_images "crosbymichael/skydns"
+    d.pull_images "atricore/josso:apache-tomcat8-tc1"
+    d.pull_images "atricore/josso:apache-tomcat8-tc2"
+  end
+
   config.vm.provision :shell, inline: play_cmd, run: "always"
   config.vm.provision :docker_compose, yml: "/home/vagrant/atricore-josso-playground/demo-josso-ce-2.4.1-javaee-tomcat/docker-compose.yml", project_name: "demo", run: "always"
   config.vm.provision :shell, inline: dns_cmd, run: "always"

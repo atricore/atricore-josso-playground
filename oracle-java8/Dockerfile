@@ -9,7 +9,7 @@ MAINTAINER Gianluca Brigandi <gianluca@atricore.com>
 RUN DEBIAN_FRONTEND=noninteractive \
   apt-get update && \
   apt-get install -y wget && \
-  wget --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u73-b02/jdk-8u73-linux-x64.tar.gz && \
+  wget -q --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u73-b02/jdk-8u73-linux-x64.tar.gz && \
   mkdir -p /opt/jdk && \
   tar -zxf jdk-8u73-linux-x64.tar.gz -C /opt/jdk && \
   update-alternatives --install /usr/bin/java java /opt/jdk/jdk1.8.0_73/bin/java 100 && \
