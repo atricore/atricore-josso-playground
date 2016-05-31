@@ -1,11 +1,10 @@
-FROM atricore/josso:oracle-java8
+FROM java:8
 
 MAINTAINER Gianluca Brigandi <gianluca@atricore.com>
 
 # Set locales
-RUN locale-gen en_GB.UTF-8
-ENV LANG en_GB.UTF-8
-ENV LC_CTYPE en_GB.UTF-8
+ENV LANG en_US.UTF-8
+ENV LC_CTYPE en_US.UTF-8
 
 # Fix sh
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh

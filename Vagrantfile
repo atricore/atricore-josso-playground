@@ -88,11 +88,16 @@ Vagrant.configure(2) do |config|
   play_cmd << "git clone https://github.com/atricore/atricore-josso-playground.git; "
   play_cmd << "git -C atricore-josso-playground/oracle-java8 pull origin master; "
   play_cmd << "docker build -t atricore/josso:oracle-java8 atricore-josso-playground/oracle-java8; "
-  play_cmd << "echo nameserver 172.17.0.1 > /etc/resolv.conf; " 
 
-  config.vm.provision :shell, inline: pkg_cmd
-  config.vm.provision :shell, inline: play_cmd, run: 'always'
+  dns_cmd = "echo nameserver 172.17.0.1 > /etc/resolv.conf; " 
+
+  config.vm.provision "infra", type: "shell" do |s|
+    s.inline = pkg_cmd
+  end
+
+  config.vm.provision :shell, inline: play_cmd, run: "always"
   config.vm.provision :docker_compose, yml: "/home/vagrant/atricore-josso-playground/demo-josso-ce-2.4.1-javaee-tomcat/docker-compose.yml", project_name: "demo", run: "always"
+  config.vm.provision :shell, inline: dns_cmd, run: "always"
    
   config.vm.network :forwarded_port, guest: 80, host: 4567
   config.vm.synced_folder "/Users", "/Users"
