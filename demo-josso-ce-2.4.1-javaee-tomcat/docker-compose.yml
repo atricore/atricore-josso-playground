@@ -27,6 +27,7 @@ tomcat1:
   - "9009:8009"
   volumes:
    - ./partnerapp_tomcat1.war:/opt/tomcat/webapps/partnerapp.war
+  dns: 172.17.0.1
 tomcat2:
   image: atricore/josso:apache-tomcat8-tc2
   ports:
@@ -34,3 +35,4 @@ tomcat2:
   - "9010:8009"
   volumes:
    - ./partnerapp_tomcat2.war:/opt/tomcat/webapps/partnerapp.war
+  dns: 172.17.0.1

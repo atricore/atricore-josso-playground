@@ -68,7 +68,7 @@ Vagrant.configure(2) do |config|
   #   sudo apt-get update
   #   sudo apt-get install -y apache2
   # SHELL
-  config.vm.hostname = "docker-host"
+  config.vm.hostname = "josso-playground"
 
   # Build provisioning command, to start we add lxc-docker package
   pkg_cmd = "apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D; "
@@ -103,9 +103,6 @@ Vagrant.configure(2) do |config|
   end
 
   config.vm.provision :shell, inline: play_cmd, run: "always"
-  config.vm.provision :docker_compose, yml: "/home/vagrant/atricore-josso-playground/demo-josso-ce-2.4.1-javaee-tomcat/docker-compose.yml", project_name: "demo", run: "always"
   config.vm.provision :shell, inline: dns_cmd, run: "always"
-   
-  config.vm.network :forwarded_port, guest: 80, host: 4567
-  config.vm.synced_folder "/Users", "/Users"
+  config.vm.provision :docker_compose, yml: "/home/vagrant/atricore-josso-playground/demo-josso-ce-2.4.1-javaee-tomcat/docker-compose.yml", project_name: "demo", run: "always"
 end
