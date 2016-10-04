@@ -103,6 +103,6 @@ Vagrant.configure(2) do |config|
   end
 
   config.vm.provision :shell, inline: play_cmd, run: "always"
-  config.vm.provision :docker_compose, yml: "/home/vagrant/atricore-josso-playground/demo-josso-ce-2.4.1-javaee-tomcat/docker-compose.yml", project_name: "demo", run: "always"
+  config.vm.provision :docker_compose, yml: "/home/vagrant/atricore-josso-playground/demo-josso-ce-2.4.2-javaee-tomcat/docker-compose.yml", project_name: "demo", run: "always"
   config.vm.provision :shell, inline: dns_cmd, run: "always"
 end

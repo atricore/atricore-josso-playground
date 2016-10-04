@@ -1,0 +1,38 @@
+josso:
+  image: atricore/josso:josso-ce-2.4.2
+  links:
+   - skydock:skydock
+   - tomcat1:tomcat1
+   - tomcat2:tomcat2
+  ports:
+  - "8081:8081"
+  tty: true
+skydock:
+  image: crosbymichael/skydock
+  links:
+   - skydns:skydns
+  command: -ttl 30 -environment dev -s /docker.sock -domain docker -name demo_skydns_1
+  volumes:
+   - /var/run/docker.sock:/docker.sock 
+skydns:
+  image: crosbymichael/skydns
+  command: -nameserver 8.8.8.8:53 -domain docker
+  dns: 8.8.8.8:53
+  ports:
+   - 172.17.0.1:53:53/udp
+tomcat1:
+  image: atricore/josso:apache-tomcat8-tc1
+  ports:
+  - "9080:8080"
+  - "9009:8009"
+  volumes:
+   - ./partnerapp_tomcat1.war:/opt/tomcat/webapps/partnerapp.war
+  dns: 172.17.0.1
+tomcat2:
+  image: atricore/josso:apache-tomcat8-tc2
+  ports:
+  - "9081:8080"
+  - "9010:8009"
+  volumes:
+   - ./partnerapp_tomcat2.war:/opt/tomcat/webapps/partnerapp.war
+  dns: 172.17.0.1
