@@ -86,8 +86,8 @@ Vagrant.configure(2) do |config|
   # Build unpublished docker images
   play_cmd = "cd /home/vagrant; "
   play_cmd << "git clone https://github.com/atricore/atricore-josso-playground.git; "
-  play_cmd << "git -C atricore-josso-playground/oracle-java8 pull origin master; "
-  play_cmd << "docker build -t atricore/josso:oracle-java8 atricore-josso-playground/oracle-java8; "
+  #play_cmd << "git -C atricore-josso-playground/oracle-java8 pull origin master; "
+  #play_cmd << "docker build -t atricore/josso:oracle-java8 atricore-josso-playground/oracle-java8; "
 
   dns_cmd = "echo nameserver 172.17.0.1 > /etc/resolv.conf; " 
 
@@ -103,6 +103,6 @@ Vagrant.configure(2) do |config|
   end
 
   config.vm.provision :shell, inline: play_cmd, run: "always"
-  config.vm.provision :docker_compose, yml: "/home/vagrant/atricore-josso-playground/demo-josso-ce-2.4.2-javaee-tomcat/docker-compose.yml", project_name: "demo", run: "always"
+  config.vm.provision :docker_compose, yml: "/home/vagrant/atricore-josso-playground/demo-josso-ce-2.4.3-javaee-tomcat/docker-compose.yml", project_name: "demo", run: "always"
   config.vm.provision :shell, inline: dns_cmd, run: "always"
 end
