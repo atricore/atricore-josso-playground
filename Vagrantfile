@@ -86,8 +86,6 @@ Vagrant.configure(2) do |config|
   # Build unpublished docker images
   play_cmd = "cd /home/vagrant; "
   play_cmd << "git clone https://github.com/atricore/atricore-josso-playground.git; "
-  #play_cmd << "git -C atricore-josso-playground/oracle-java8 pull origin master; "
-  #play_cmd << "docker build -t atricore/josso:oracle-java8 atricore-josso-playground/oracle-java8; "
 
   dns_cmd = "echo nameserver 172.17.0.1 > /etc/resolv.conf; " 
 
